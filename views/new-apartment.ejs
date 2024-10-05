@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>
+        <%= apartment._id ? 'Edit' : 'Add New' %> Apartment
+    </title>
+    <%- include('./partials/head.ejs') %>
+        <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+    <header>
+        <%- include('./partials/header.ejs') %>
+    </header>
+    <h1 class="form-title">
+        <%= apartment._id ? 'Edit' : 'Add New' %> Apartment
+    </h1>
+    <main class="container">
+        <form action="/admin/apartment/new-apartment" method="POST" class="apartment-form">
+            <input type="hidden" name="id" id="id" value="<%= apartment._id %>">
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" required maxlength="35" value="<%= apartment.title %>"
+                class="input-title">
+
+            <label for="description">About this place</label>
+            <textarea rows="5" name="description" id="description"
+                class="textarea-description"><%= apartment.description %></textarea>
+
+            <label for="price">Price per night</label>
+            <input type="number" name="price" id="price" required min="0" value="<%= apartment.price %>"
+                class="input-price">
+
+            <label for="size">M <sup>2</sup></label>
+            <input type="number" name="size" id="size" required min="0" value="<%= apartment.size %>"
+                class="input-size">
+
+            <label for="mainPhoto">Main picture</label>
+            <input type="url" name="mainPhoto" id="mainPhoto" required value="<%= apartment.mainPhoto %>"
+                class="input-photo">
+
+            <label for="capacity">Apartment capacity</label>
+            <input type="number" name="capacity" id="capacity" required min="1" value="<%= apartment.capacity %>"
+                class="input-capacity">
+
+            <label for="rooms">Rooms</label>
+            <input type="number" name="rooms" id="rooms" required min="1" value="<%= apartment.rooms %>"
+                class="input-rooms">
+
+            <label for="beds">Beds</label>
+            <input type="number" name="beds" id="beds" required min="1" value="<%= apartment.beds %>"
+                class="input-beds">
+
+            <label for="bathrooms">Bathrooms</label>
+            <input type="number" name="bathrooms" id="bathrooms" required min="1" value="<%= apartment.bathrooms %>"
+                class="input-bathrooms">
+
+            <label for="city">City</label>
+            <input type="text" name="city" id="city" required value="<%= apartment.city %>" class="input-city">
+
+            <label for="latitude">Latitude</label>
+            <input type="number" name="latitude" id="latitude" step="any" required value="<%= apartment.latitude %>"
+                class="input-latitude">
+
+            <label for="longitude">Longitude</label>
+            <input type="number" name="longitude" id="longitude" step="any" required value="<%= apartment.longitude %>"
+                class="input-longitude">
+
+
+            <label for="services">Services</label>
+            <div class="services-list">
+                <label> <span class="service-icon air-conditioning"></span>
+                    Air Conditioning
+                    <input type="checkbox" name="services" value="air_conditioning"
+                        <%=apartment.services?.includes('air_conditioning') ? 'checked' : '' %>>
+                </label>
+                <label>
+                    <span class="service-icon heating"></span>
+                    Heating
+                    <input type="checkbox" name="services" value="heating" <%=apartment.services?.includes('heating')
+                        ? 'checked' : '' %>>
+                </label>
+                <label>
+                    <span class="service-icon tv"></span>
+                    TV
+                    <input type="checkbox" name="services" value="tv" <%=apartment.services?.includes('tv') ? 'checked'
+                        : '' %>>
+                </label>
+                <label>
+                    <span class="service-icon kitchen"></span> Kitchen
+                    <input type="checkbox" name="services" value="kitchen" <%=apartment.services?.includes('kitchen')
+                        ? 'checked' : '' %>>
+                </label>
+                <label>
+                    <span class="service-icon wifi"></span> Wi-Fi
+                    <input type="checkbox" name="services" value="wifi" <%=apartment.services?.includes('wifi')
+                        ? 'checked' : '' %>>
+                </label>
+                <label> <span class="service-icon balcony"></span>Balcony
+                    <input type="checkbox" name="services" value="balcony" <%=apartment.services?.includes('balcony')
+                        ? 'checked' : '' %>>
+                </label>
+                <label> <span class="service-icon gym"></span>Gym
+                    <input type="checkbox" name="services" value="gym" <%=apartment.services?.includes('gym')
+                        ? 'checked' : '' %>>
+                </label>
+                <label> <span class="service-icon pool"></span>Pool
+                    <input type="checkbox" name="services" value="pool" <%=apartment.services?.includes('pool')
+                        ? 'checked' : '' %>>
+                </label>
+                <label> <span class="service-icon disability_access"></span>Disability Access
+                    <input type="checkbox" name="services" value="disability_access"
+                        <%=apartment.services?.includes('disability_access') ? 'checked' : '' %>>
+                </label>
+            </div>
+
+            <input type="submit" value="<%= apartment._id ? 'Save changes' : 'Add listing' %>" class="btn-submit">
+        </form>
+
+        <% if (apartment._id) { %>
+            <!-- Formulario para eliminar el apartamento -->
+            <form action="/admin/apartment/<%= apartment._id %>/delete" method="GET" class="delete-apartment-form">
+                <button type="submit" class="btn-delete">Delete apartment</button>
+            </form>
+            <% } %>
+
+    </main>
+</body>
+
+</html>

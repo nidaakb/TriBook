@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmación de Reserva</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+    <div class="reservation-confirmation">
+        <h1>Thank you for booking with us! Your booking is confirmed.</h1>
+        <p>You will find all the details for your booking below.</p>
+        <div class="reservation-details">
+            <h2>Booking details</h2>
+            <p><strong>Email:</strong>
+                <%= reservation.email %>
+            </p>
+            <p><strong>Apartment:</strong>
+                <%= reservation.apartment.title %>
+            </p>
+            <p><strong>Price:</strong>
+                <%= reservation.apartment.price %> € por noche
+            </p>
+            <p><strong>Check in:</strong>
+                <%= reservation.startDate %>
+            </p>
+            <p><strong>Check out:</strong>
+                <%= reservation.endDate %>
+            </p>
+        </div>
+        <a href="/" class="btn-home">Volver a la página principal</a>
+    </div>
+
+</html>

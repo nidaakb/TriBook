@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Apartment details</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <%- include('./partials/head.ejs') %>
+</head>
+
+<body>
+    <header>
+        <%- include('./partials/header.ejs') %>
+    </header>
+    <main class="detail-apartment container">
+        <div class="apartment-info">
+            <article class="apartment-details">
+                <div class="messages">
+                    <% if (locals.error_msg) { %>
+                        <div class="error-message">
+                            <%= locals.error_msg %>
+                        </div>
+                        <% } %>
+                </div>
+
+                <h1>
+                    <%= selectedApartment.title %>
+                </h1>
+                <header class="apartment-price">
+                    <del style="color: rgb(190, 182, 182)">
+                        <%= selectedApartment.price %>
+                    </del>
+                    <span class="price-discounted">
+                        <%= selectedApartment.price * 0.9 %> € per night
+                    </span>
+                </header>
+
+                <img src="<%= selectedApartment.mainPhoto %>" alt="<%= selectedApartment.title %>"
+                    class="detail-apartment-image">
+
+                <div class="apartment-description">
+                    <h1>About this place</h1>
+                    <p>
+                        <%= selectedApartment.description %>
+                    </p>
+                </div>
+
+                <!-- New box for specifications -->
+                <div class="apartment-specifications">
+                    <h2>Specifications</h2>
+                    <p><strong>Size:</strong>
+                        <%= selectedApartment.size %> m<sup>2</sup>
+                    </p>
+                    <p><strong>Capacity:</strong>
+                        <%= selectedApartment.capacity %> pax
+                    </p>
+                    <p><strong>Rooms:</strong>
+                        <%= selectedApartment.rooms %>
+                    </p>
+                    <p><strong>Beds:</strong>
+                        <%= selectedApartment.beds %>
+                    </p>
+                    <p><strong>Bathrooms:</strong>
+                        <%= selectedApartment.bathrooms %>
+                    </p>
+                    <p><strong>City:</strong>
+                        <%= selectedApartment.city %>
+                    </p>
+                    <p><strong>Latitude:</strong>
+                        <%= selectedApartment.latitude %>
+                    </p>
+                    <p><strong>Longitude:</strong>
+                        <%= selectedApartment.longitude %>
+                    </p>
+                </div>
+            </article>
+
+            <div class="services">
+                <h2>Available services</h2>
+                <ul class="service-list">
+                    <% if (selectedApartment.services && selectedApartment.services.length> 0) { %>
+                        <% selectedApartment.services.forEach(service=> {
+                            const formattedService = service.replace(/_/g, ' ').toLowerCase().replace(/\b\w/g, char =>
+                            char.toUpperCase());
+                            %>
+                            <li class="service-item">
+                                <span class="service-icon <%= service.toLowerCase().replace(/_/g, '-') %>"></span>
+                                <%= formattedService %>
+                            </li>
+                            <% }); %>
+                                <% } else { %>
+                                    <li>The apartment does not have any services available. Contact the admin if you
+                                        wish to know more.</li>
+                                    <% } %>
+                </ul>
+            </div>
+
+            <div class="container reservation-section">
+                <% if (isAdmin) { %>
+                    <a href="/admin/apartment/<%= selectedApartment._id %>/edit/" class="btn-edit">Modify apartment</a>
+                    <% } else { %>
+                        <h2>Booking details</h2>
+                        <form action="/apartment/new-reservation" method="post" class="reservation-form">
+                            <input type="hidden" name="idApartment" value="<%= selectedApartment._id %>">
+                            <label for="email">Email:</label>
+                            <input type="email" name="email" id="email" required>
+                            <label for="startDate">Check in</label>
+                            <input type="date" name="startDate" id="startDate" required>
+                            <label for="endDate">Check out</label>
+                            <input type="date" name="endDate" id="endDate" required>
+                            <input type="submit" value="Reserve" class="btn-reserve">
+                        </form>
+                        <% } %>
+            </div>
+        </div>
+
+        <div id="map" style="height: 400px; margin-top: 30px;"></div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const map = L.map('map').setView([<%= selectedApartment.latitude %>, <%= selectedApartment.longitude %>], 13);
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+
+                L.marker([<%= selectedApartment.latitude %>, <%= selectedApartment.longitude %>]).addTo(map)
+                    .bindPopup('<%= selectedApartment.title %>')
+                    .openPopup();
+            });
+        </script>
+
+    </main>
+</body>
+
+</html>

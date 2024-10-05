@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>🏨 Tribook Apartments</title>
+    <%- include('./partials/head.ejs') %>
+        <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+    <header class="container-fluid">
+        <%- include('./partials/header.ejs') %>
+    </header>
+    <main class="container home-page">
+        <h1 class="home-title">Welcome to TriBook</h1>
+        <% if (isAuthenticated) { %>
+            <p>Welcome, <%= username %>!</p>
+            <% if (role==='admin' ) { %>
+                <p>You have admin access.</p>
+                <p><a href="/admin/apartment/new-apartment">Add New Apartment</a></p>
+                <% } else if (role==='customer' ) { %>
+                    <p>You have customer access.</p>
+                    <% } %>
+                        <% } else { %>
+                            <p>Please log in to access more features.</p>
+                            <% } %>
+                                <form class="search-form" action="/search">
+                                    <fieldset class="search-fieldset">
+                                        <label for="maxPrice">Max price per night</label>
+                                        <input type="number" name="maxPrice" id="maxPrice" min="0" max="1000000"
+                                            value="1000000" class="input-price">
+                                    </fieldset>
+                                    <fieldset class="search-fieldset">
+                                        <label for="capacity">Minimum capacity</label>
+                                        <input type="number" name="capacity" id="capacity" min="1" value="1"
+                                            class="input-capacity">
+                                    </fieldset>
+                                    <fieldset class="search-fieldset">
+                                        <label for="city">City</label>
+                                        <input type="text" name="city" id="city" class="input-city"
+                                            placeholder="Enter city">
+                                    </fieldset>
+                                    <fieldset class="search-fieldset">
+                                        <label for="orderBy">Sort by:</label>
+                                        <select name="orderBy" id="orderBy" class="select-order">
+                                            <option value="default">Newest apartments first</option>
+                                            <option value="minPrice">Price (lowest first)</option>
+                                        </select>
+                                    </fieldset>
+                                    <fieldset class="search-fieldset">
+                                        <label for="startDate">Start date</label>
+                                        <input type="date" name="startDate" id="startDate" class="input-date">
+                                    </fieldset>
+                                    <fieldset class="search-fieldset">
+                                        <label for="endDate">End date</label>
+                                        <input type="date" name="endDate" id="endDate" class="input-date">
+                                    </fieldset>
+                                    <input type="submit" value="Filter and sort" class="btn-filter">
+                                </form>
+
+                                <div class="container apartments">
+                                    <% for (const ap of apartments) { %>
+                                        <a href="/apartment/<%= ap._id %>" class="apartment-link">
+                                            <article class="apartment">
+                                                <header class="apartment-title">
+                                                    <%= ap.title %>
+                                                </header>
+                                                <div><img src="<%= ap.mainPhoto %>" alt="" class="apartment-image">
+                                                </div>
+                                                <footer class="apartment-footer">
+                                                    <div class="apartment-info" <p><strong>
+                                                            <%= ap.price %> € per night
+                                                        </strong></p>
+                                                        <p><strong>Size:</strong>
+                                                            <%= ap.size %> m²
+                                                        </p>
+                                                        <p><strong>Capacity:</strong>
+                                                            <%= ap.capacity %> guests
+                                                        </p>
+                                                    </div>
+                                                    <% if (ap.services && ap.services.length> 0) { %>
+                                                        <ul class="service-list" <% ap.services.forEach(service=> { %>
+                                                            <li class="service-item">
+                                                                <span
+                                                                    class="service-icon <%= service.toLowerCase().replace(/_/g, '-') %>"></span>
+                                                            </li>
+                                                            <% }); %>
+                                                        </ul>
+                                                        <% } else { %>
+                                                            <li>No services available</li>
+                                                            <% } %>
+
+                                                </footer>
+                                            </article>
+                                        </a>
+                                        <% } %>
+                                </div>
+    </main>
+</body>
+
+</html>

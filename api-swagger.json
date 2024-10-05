@@ -1,0 +1,292 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Apartment Management API",
+        "description": "API for managing apartments in a tourist management system.",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000"
+        }
+    ],
+    "paths": {
+        "/apartment/new-apartment": {
+            "get": {
+                "summary": "Display the form to add a new apartment",
+                "tags": [
+                    "Admin"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully displays the form to create a new apartment"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new apartment",
+                "tags": [
+                    "Admin"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "number"
+                                    },
+                                    "mainPhoto": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "title",
+                                    "price",
+                                    "mainPhoto"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Apartment created successfully"
+                    },
+                    "400": {
+                        "description": "Bad request. Missing required fields or invalid data."
+                    }
+                }
+            }
+        },
+        "/apartment/{idApartment}/edit": {
+            "get": {
+                "summary": "Display form to edit an apartment",
+                "tags": [
+                    "Admin"
+                ],
+                "parameters": [
+                    {
+                        "name": "idApartment",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully displays the edit apartment form"
+                    },
+                    "404": {
+                        "description": "Apartment not found"
+                    }
+                }
+            }
+        },
+        "/apartment/{idApartment}/delete": {
+            "get": {
+                "summary": "Delete an apartment",
+                "tags": [
+                    "Admin"
+                ],
+                "parameters": [
+                    {
+                        "name": "idApartment",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully deleted the apartment"
+                    },
+                    "404": {
+                        "description": "Apartment not found"
+                    }
+                }
+            }
+        },
+        "/login": {
+            "get": {
+                "summary": "Display login form",
+                "tags": [
+                    "Auth"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully displays the login form"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Log in to the system",
+                "tags": [
+                    "Auth"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "email",
+                                    "password"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully logged in"
+                    },
+                    "401": {
+                        "description": "Invalid credentials"
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "get": {
+                "summary": "Log out from the system",
+                "tags": [
+                    "Auth"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully logged out"
+                    }
+                }
+            }
+        },
+        "/": {
+            "get": {
+                "summary": "List all apartments",
+                "tags": [
+                    "Public"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieves the list of apartments"
+                    }
+                }
+            }
+        },
+        "/search": {
+            "get": {
+                "summary": "Search for apartments",
+                "tags": [
+                    "Public"
+                ],
+                "parameters": [
+                    {
+                        "name": "query",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieves the list of apartments based on the search query"
+                    }
+                }
+            }
+        },
+        "/apartment/{idApartment}": {
+            "get": {
+                "summary": "Get details of a specific apartment",
+                "tags": [
+                    "Public"
+                ],
+                "parameters": [
+                    {
+                        "name": "idApartment",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieves the details of the apartment"
+                    },
+                    "404": {
+                        "description": "Apartment not found"
+                    }
+                }
+            }
+        },
+        "/apartment/new-reservation": {
+            "post": {
+                "summary": "Create a new reservation for an apartment",
+                "tags": [
+                    "Public"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "idApartment": {
+                                        "type": "string"
+                                    },
+                                    "checkIn": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "checkOut": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "guests": {
+                                        "type": "number"
+                                    }
+                                },
+                                "required": [
+                                    "idApartment",
+                                    "checkIn",
+                                    "checkOut",
+                                    "guests"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Reservation created successfully"
+                    },
+                    "400": {
+                        "description": "Bad request. Missing required fields or invalid data."
+                    }
+                }
+            }
+        }
+    }
+}

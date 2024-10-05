@@ -1,0 +1,21 @@
+<header>
+    <div class="navigation-menu">
+        <h1 class="page-title"><a href="/">TriBook</a></h1>
+        <nav>
+            <% if (isAdmin) { %>
+                <p><a href="/admin/apartment/new-apartment">Add new apartment</a></p>
+                <p><a href="/logout">Logout</a></p>
+                <% } else { %>
+                    <p><a href="/login">Login</a></p>
+                    <p><a href="/signup">Sign Up</a></p>
+                    <% } %>
+        </nav>
+    </div>
+    <div>
+        <% if (success_msg && success_msg.length !=0) { %>
+            <div class="alert success">
+                <%= success_msg %>
+            </div>
+            <% } %>
+    </div>
+</header>

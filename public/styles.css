@@ -1,0 +1,455 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
+
+:root {
+    --primary-color: #0a3d2a;
+    --secondary-color: #1a5d3b;
+    --accent-color: #2ecc71;
+    --text-color: #333333;
+    --light-text-color: #666666;
+    --background-color: #ffffff;
+    --card-background: #f8f8f8;
+    --border-color: #e0e0e0;
+    --hover-color: #f0f0f0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header Styles */
+header {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    padding: 1rem 0;
+}
+
+.navigation-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-title a {
+    color: var(--background-color);
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+nav {
+    display: flex;
+    gap: 1rem;
+}
+
+nav a {
+    color: var(--background-color);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+    background-color: var(--secondary-color);
+}
+
+.alert {
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 4px;
+}
+
+.success {
+    background-color: var(--accent-color);
+    color: var(--background-color);
+}
+
+/* Main Content Styles */
+main {
+    padding: 2rem 0;
+}
+
+.detail-apartment {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+}
+
+.apartment-info {
+    background-color: var(--card-background);
+    border-radius: 8px;
+    padding: 2rem;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+
+}
+
+.apartment-info p {
+    margin-left: -0.5rem;
+}
+
+.apartment-details h1 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.apartment-price {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.price-discounted {
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+.detail-apartment-image {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.apartment-description {
+    margin-top: 2rem;
+}
+
+.services {
+    background-color: var(--card-background);
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+
+.services .service-list {
+    display: block;
+    /* Switch to block layout for vertical alignment */
+}
+
+.services .service-item {
+    margin-bottom: 0.5rem;
+    /* Space between items vertically */
+    display: flex;
+    /* Align icon and text */
+    align-items: center;
+    /* Center items vertically */
+}
+
+.service-list {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.service-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.service-icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    font-family: "Font Awesome 5 Free";
+    /* Font Awesome family */
+    font-weight: 900;
+    /* Use solid icons */
+    color: var(--accent-color);
+    /* Green color for the icons */
+    font-size: 1.5rem;
+    /* Size of icons */
+    vertical-align: middle;
+}
+
+.service-icon.wifi::before {
+    content: '\f1eb';
+}
+
+.service-icon.tv::before {
+    content: '\f26c';
+}
+
+.service-icon.kitchen::before {
+    content: '\f2e7';
+}
+
+.service-icon.air-conditioning::before {
+    content: '\f2dc';
+}
+
+.service-icon.heating::before {
+    content: '\f7e4';
+}
+
+.service-icon.gym::before {
+    content: '\f44b';
+}
+
+.service-icon.pool::before {
+    content: '\f5c4';
+}
+
+.service-icon.balcony::before {
+    content: '\f1e5';
+}
+
+.service-icon.disability-access::before {
+    content: '\f193';
+}
+
+/* Reservation Form Styles */
+.reservation-section {
+    background-color: var(--card-background);
+    border-radius: 8px;
+    padding: 3rem;
+
+}
+
+.reservation-form {
+    display: grid;
+    gap: 1rem;
+}
+
+.reservation-form label {
+    font-weight: bold;
+}
+
+.reservation-form input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.btn-reserve {
+    background-color: var(--accent-color);
+    color: var(--background-color);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-reserve:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Home Page Styles */
+.home-title {
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.search-form {
+    background-color: var(--card-background);
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.search-fieldset {
+    border: none;
+    padding: 0;
+}
+
+.search-fieldset label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.search-fieldset input,
+.search-fieldset select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.btn-filter {
+    background-color: var(--accent-color);
+    color: var(--background-color);
+    border: none;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: auto;
+    transition: background-color 0.3s ease;
+}
+
+.btn-filter:hover {
+    background-color: var(--secondary-color);
+}
+
+.apartments {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.apartment-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.apartment {
+    background-color: var(--card-background);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.apartment:hover {
+    transform: translateY(-5px);
+}
+
+.apartment-title {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    padding: 1rem;
+    font-weight: bold;
+}
+
+.apartment-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.apartment-footer {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.apartment-footer .service-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5 rem;
+}
+
+.apartment-footer .service-item {
+    display: flex;
+    align-items: center;
+}
+
+/* Form Styles */
+.form-title {
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.apartment-form {
+    background-color: var(--card-background);
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: grid;
+    gap: 1rem;
+}
+
+.apartment-form label {
+    font-weight: bold;
+}
+
+.apartment-form input,
+.apartment-form textarea,
+.apartment-form select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.btn-edit {
+    background-color: var(--accent-color);
+    /* Green background */
+    color: var(--background-color);
+    /* White text */
+    border: none;
+    /* No border */
+    padding: 0.75rem 1.5rem;
+    /* Padding for spacing */
+    border-radius: 4px;
+    /* Rounded corners */
+    cursor: pointer;
+    /* Pointer cursor on hover */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    /* Smooth transition effects */
+    font-size: 1rem;
+    /* Font size */
+}
+
+.btn-edit:hover {
+    background-color: var(--secondary-color);
+    /* Darker green on hover */
+    transform: translateY(-2px);
+    /* Slight lift effect on hover */
+}
+
+.btn-edit:active {
+    transform: translateY(1px);
+    /* Pressed effect */
+}
+
+
+.btn-submit {
+    background-color: var(--accent-color);
+    color: var(--background-color);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: var(--secondary-color);
+}
+
+.btn-delete {
+    background-color: #e74c3c;
+    color: var(--background-color);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-delete:hover {
+    background-color: #c0392b;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .detail-apartment {
+        grid-template-columns: 1fr;
+    }
+
+    .search-form {
+        grid-template-columns: 1fr;
+    }
+}
