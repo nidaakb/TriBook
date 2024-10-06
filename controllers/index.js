@@ -12,9 +12,9 @@ const getApartments = async (req, res) => {
 
     res.render('home', {
         apartments,
-        isAuthenticated: req.session.isAuthenticated,
-        role: req.session.role,
-        username: req.session.username
+        isAuthenticated: req.session.isAuthenticated || false,
+        role: req.session.role || null,
+        username: req.session.username || 'Guest'
 
     });
 }

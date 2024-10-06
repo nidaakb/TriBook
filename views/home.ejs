@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>🏨 Tribook Apartments</title>
+    <title>Tribook Apartments</title>
     <%- include('./partials/head.ejs') %>
         <link rel="stylesheet" href="/styles.css">
 </head>
@@ -13,17 +13,16 @@
     </header>
     <main class="container home-page">
         <h1 class="home-title">Welcome to TriBook</h1>
-        <% if (isAuthenticated) { %>
-            <p>Welcome, <%= username %>!</p>
-            <% if (role==='admin' ) { %>
-                <p>You have admin access.</p>
-            
-                <% } else if (role==='customer' ) { %>
-                    <p>You have customer access.</p>
+<% if (isAuthenticated) { %>
+    <p>Welcome, <%= username || 'User' %>!</p> 
+    <% if (role==='admin' ) { %>
+        <p>You have admin access.</p>
+        <% } else if (role==='customer' ) { %>
+            <p>You have customer access.</p>
+            <% } %>
+                <% } else { %>
+                    <p>Please log in to access more features.</p>
                     <% } %>
-                        <% } else { %>
-                            <p>Please log in to access more features.</p>
-                            <% } %>
                                 <form class="search-form" action="/search">
                                     <fieldset class="search-fieldset">
                                         <label for="maxPrice">Max price per night</label>
