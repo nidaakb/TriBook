@@ -1,6 +1,6 @@
 # Apartment Management API
 
-**TriBook** is a tourist apartment management system for Catalonia, allowing administrators to manage apartments and clients to view listings. Each apartment includes details like title, description, room count, photos, pricing, amenities, and location coordinates. The system currently supports two user types: administrators, who can create and edit listings, and clients, who can browse apartments without authentication.
+**TriBook** is a tourist apartment management system, allowing administrators to manage apartments and clients to view listings. Each apartment includes details like title, description, room count, photos, pricing, amenities, and location coordinates. The system currently supports two user types: administrators, who can create and edit listings, and clients, who can browse apartments without and with authentication.
 
 ## Table of Contents
 - [Features](#features)
