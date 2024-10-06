@@ -1,4 +1,3 @@
-// Your code here ...
 const { Schema, model } = require('mongoose');
 
 

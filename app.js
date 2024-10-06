@@ -107,7 +107,7 @@ app.use('/api', apiRoutes);
 
 async function connectDB() {
     await mongoose.connect(process.env.MONGODB_URI);
-    console.log('Conectado a la base de datos');
+    console.log('Connected to the database');
 }
 
 connectDB().catch(err => console.log(err))
@@ -118,22 +118,22 @@ app.use((err, req, res, next) => {
     // err.stack -> la pila de llamadas
     console.error(err)
     // Enviar un correo electronico o cualquier otro medio a los desarrolladores para que se den cuenta de que algo ha 'petao'
-    res.status(500).send('<p>Ups! La operación ha fallado. Hemos informado a los desarrolladores. Vuelve a probarlo más tarde.Vuelve a la <a href="/">home page</a></p> ');
+    res.status(500).send('<p>Oops! The operation has failed. We have informed the developers. Please try again later. Go back to the <a href="/">home page</a></p> ');
 })
 
 app.get('/', (req, res) => {
-    const isAuthenticated = req.session.isAuthenticated || false; // Your authentication logic
-    const isAdmin = isAuthenticated && req.session.role === 'admin'; // Assuming req.user contains user info
+    const isAuthenticated = req.session.isAuthenticated || false; 
+    const isAdmin = isAuthenticated && req.session.role === 'admin'; 
 
     res.render('home', {
         isAuthenticated,
         isAdmin,
-        username: req.user.username || '', // Pass the username if authenticated
-        success_msg: req.flash('success_msg') // Any success message
+        username: req.user.username || '', 
+        success_msg: req.flash('success_msg') 
     });
 });
 
 app.listen(PORT, (req, res) => {
-    console.log("Servidor escuchando correctamente en el puerto " + PORT);
+    console.log("Server listening correctly on port " + PORT);
     console.log(`Swagger docs available at http://localhost:${PORT}/api/doc`)
 });

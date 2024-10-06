@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--   <link rel="stylesheet" href="/styles.css"> -->
     <%- include('./partials/head.ejs') %>
-        <title>Sign up - TriBook</title>
+        <title>🏨 Sign up - TriBook</title>
 
         <style>
             form {
@@ -67,12 +67,10 @@
                     </div>
                     <% } %>
 
-                        <!-- Assuming this is part of your signup.ejs -->
                         <form action="/signup" method="POST">
                             <input type="text" name="username" placeholder="Username" required>
                             <input type="email" name="email" placeholder="Email" required>
                             <input type="password" name="password" placeholder="Password" required>
-                            <!-- Checkbox to create admin user -->
                             <label>
                                 <input type="checkbox" name="isAdmin" value="true"> Create Admin User
                             </label>

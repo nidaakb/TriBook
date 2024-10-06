@@ -42,7 +42,7 @@ const postNewApartment = async (req, res) => {
             longitude,
             latitude 
         });
-        req.flash('success_msg', `Datos del apartamento actualizados.`);
+        req.flash('success_msg', `Apartment details updated successfully.`);
         return res.redirect('/'); // redirect to home page after the changes
     }
 
@@ -59,7 +59,7 @@ const postNewApartment = async (req, res) => {
         latitude,
     });
 
-    req.flash('success_msg', `Apartamento ${req.body.title} creado correctamente`);
+    req.flash('success_msg', `Apartament ${req.body.title} created successfully!`);
     res.redirect('/');
 };
 
@@ -70,11 +70,11 @@ const deleteApartment = async(req, res) => {
         // Buscar y eliminar el apartamento
         await Apartment.findByIdAndDelete(idApartment);
         
-        req.flash('success_msg', 'Apartamento eliminado correctamente');
+        req.flash('success_msg', 'Apartment successfully removed.');
         res.redirect('/');  // Redirigir al home o a la lista de apartamentos después de eliminar
     } catch (error) {
-        console.error('Error al eliminar el apartamento:', error);
-        req.flash('error_msg', 'No se pudo eliminar el apartamento');
+        console.error('Error deleting apartment:', error);
+        req.flash('error_msg', 'Failed to delete apartment');
         res.redirect(req.get('referer'));  // Redirigir a la página anterior si hay un error
     }
 } 

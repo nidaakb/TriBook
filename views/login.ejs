@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log in</title>
+    <title>🏨 Log in - TriBook</title>
+    <link rel="stylesheet" href="/styles.css">
     <style>
         body {
             display: flex;
@@ -74,6 +75,7 @@
             text-align: center;
             margin-bottom: 1rem;
         }
+    
 
         .success-msg {
             color: green;
@@ -103,16 +105,18 @@
 
     <div class="login-container">
         <h2>Log in</h2>
-        <% if (typeof error_msg !=='undefined' ) { %>
-            <div class="error-msg">
-                <%= error_msg %>
-            </div>
-            <% } %>
-                <% if (typeof success_msg !=='undefined' ) { %>
-                    <div class="success-msg">
-                        <%= success_msg %>
-                    </div>
-                    <% } %>
+            <% if (error_msg.length> 0) { %>
+                <div class="alert error-msg">
+                    <%= error_msg %>
+                </div>
+                <% } %>
+            
+                    <% if (success_msg.length> 0) { %>
+                        <div class="alert success-msg">
+                            <%= success_msg %>
+                        </div>
+                        <% } %>
+
                         <form method="POST" action="/login">
                             <div class="form-group">
                                 <label for="username">Username</label>

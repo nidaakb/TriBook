@@ -2,15 +2,18 @@ const User = require('../models/user.model');
 
 // Render the login form
 const getLoginForm = (req, res) => {
+    const errorMsg = req.flash('error_msg');
+    const successMsg = req.flash('success_msg');
+console.log('Error messages:', errorMsg);
     res.render('login', {
-        error_msg: req.flash('error_msg'),
-        success_msg: req.flash('success_msg')
+        error_msg: errorMsg,
+        success_msg: successMsg
     });
 };
 
 // Handle the signup form submission
 const postSignupForm = async (req, res) => {
-    const { username, email, password, isAdmin } = req.body; // Add isAdmin parameter
+    const { username, email, password, isAdmin } = req.body; 
 
     try {
         // Check if the user already exists
@@ -27,7 +30,7 @@ const postSignupForm = async (req, res) => {
         const newUser = new User({
             username,
             email,
-            password, // Plain text password (not secure for production)
+            password,
             role
         });
 
@@ -56,8 +59,7 @@ const postLoginForm = async (req, res) => {
             return res.redirect('/login');
         }
 
-        // Compare the plain password with the stored password
-        const isMatch = password === user.password;
+        const isMatch = password === user.password; // Compara la contraseña
         if (!isMatch) {
             req.flash('error_msg', 'Invalid username or password.');
             console.log('Password mismatch.');
@@ -81,6 +83,7 @@ const postLoginForm = async (req, res) => {
         res.redirect('/login');
     }
 };
+
 
 // Render the signup form
 const getSignupForm = (req, res) => {

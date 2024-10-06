@@ -12,7 +12,6 @@ const reservationSchema = Schema({
     endDate: {
         type: Date,
         required: true
-        // TODO: podéis preguntar a CHAT como realizar una validación para que startDate sea siempre antes que endDate
     },
     status: {
         type: String,

@@ -27,6 +27,7 @@ body {
     padding: 0 20px;
 }
 
+
 /* Header Styles */
 header {
     background-color: var(--primary-color);
@@ -73,6 +74,10 @@ nav a:hover {
 .success {
     background-color: var(--accent-color);
     color: var(--background-color);
+}
+
+.error-message{
+    background-color: red;
 }
 
 /* Main Content Styles */
@@ -443,6 +448,57 @@ main {
     background-color: #c0392b;
 }
 
+/* Confirmación de Reserva */
+.reservation-confirmation {
+    background-color: var(--card-background);
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin: 2rem auto;
+    max-width: 600px;
+}
+
+.thank-you-message {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.confirmation-text {
+    color: var(--light-text-color);
+    margin-bottom: 2rem;
+}
+
+.reservation-details {
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.reservation-details h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.btn-home {
+    background-color: var(--accent-color);
+    color: var(--background-color);
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    /* Remove underline from link */
+}
+
+.btn-home:hover {
+    background-color: var(--secondary-color);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .detail-apartment {
@@ -452,4 +508,12 @@ main {
     .search-form {
         grid-template-columns: 1fr;
     }
+
+                .reservation-confirmation {
+                    padding: 1rem;
+                }
+        
+                .reservation-details {
+                    padding: 1rem;
+                }
 }

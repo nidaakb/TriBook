@@ -1,4 +1,3 @@
-/** Crear un conjunto de funciones que van a dar respuesta a nuestras rutas  */
 const mongoose = require('mongoose');
 
 // Importamos el modelo
@@ -30,7 +29,7 @@ const getApartmentById = async (req, res) => {
         
         // Check if the apartment exists
         if (!selectedApartment) {
-            req.flash('error_msg', 'Apartamento no encontrado.');
+            req.flash('error_msg', 'Apartament not found.');
             return res.redirect('/');
         }
 
@@ -39,7 +38,7 @@ const getApartmentById = async (req, res) => {
             selectedApartment
         });
     } catch (error) {
-        req.flash('error_msg', 'Error al obtener los detalles del apartamento.');
+        req.flash('error_msg', 'Error retrieving apartment details.');
         return res.redirect('/');
     }
 };
@@ -55,7 +54,7 @@ const searchApartments = async (req, res) => {
         "minPrice": { price: 1 }
     };
 
-    const sortCriteria = orderDict[orderBy] || orderDict.default; // Default to 'default' if orderBy is not valid
+    const sortCriteria = orderDict[orderBy] || orderDict.default; 
     console.log("sortCriteria:", sortCriteria);
 
     // Build filter object
@@ -78,7 +77,7 @@ const searchApartments = async (req, res) => {
             $not: {
                 $elemMatch: {
                     startDate: { $lt: new Date(endDate) },
-                    endDate: { $gt: new Date(startDate) } // Ensure there's no overlap
+                    endDate: { $gt: new Date(startDate) } 
                 }
             }
         };
@@ -111,7 +110,7 @@ const postNewReservation = async (req, res) => {
 
         // Validar si las fechas son correctas
         if (start >= end) {
-            req.flash('error_msg', 'La fecha de inicio debe ser anterior a la fecha de fin.');
+            req.flash('error_msg', 'The start date must be before the end date.');
             return res.redirect(`/apartment/${idApartment}`);
         }
 
@@ -122,7 +121,7 @@ const postNewReservation = async (req, res) => {
         //console.log("Apartamento encontrado:", apartment);
 
         if (!apartment) {
-            req.flash('error_msg', 'Apartamento no encontrado.');
+            req.flash('error_msg', 'Apartament not found.');
             return res.redirect('/');
         }
 
@@ -169,7 +168,7 @@ const postNewReservation = async (req, res) => {
         });
     } catch (error) {
         console.error(error);
-        req.flash('error_msg', 'Error al crear la reserva.');
+        req.flash('error_msg', 'Error creating the reservation.');
         res.redirect(`/apartment/${idApartment}`);
     }
 };
