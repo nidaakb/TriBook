@@ -70,3 +70,5 @@
 
 ## API Documentation
 API documentation is available via Swagger UI. After starting the server, navigate to `http://localhost:3000/api/doc` to view the API documentation.
+![Endpoints](/public/Screenshot%202024-10-06%20at%2021.38.51.png)
+
