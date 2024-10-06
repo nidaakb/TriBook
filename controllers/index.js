@@ -44,58 +44,64 @@ const getApartmentById = async (req, res) => {
 
 
 const searchApartments = async (req, res) => {
-    // Parse the query string received from the form
     const { capacity, maxPrice, city, startDate, endDate, orderBy } = req.query;
 
-    // Dictionary for sorting criteria
     const orderDict = {
         "default": { _id: -1 },
         "minPrice": { price: 1 }
     };
 
-    const sortCriteria = orderDict[orderBy] || orderDict.default; 
+    const sortCriteria = orderDict[orderBy] || orderDict.default;
     console.log("sortCriteria:", sortCriteria);
 
-    // Build filter object
     const filter = {};
 
-    // Add conditions based on the provided query parameters
     if (maxPrice) {
-        filter.price = { $lte: Number(maxPrice) }; 
+        filter.price = { $lte: Number(maxPrice) };
     }
     if (capacity) {
         filter.capacity = { $gte: Number(capacity) };
     }
     if (city) {
-        filter.city = city; 
-    }
-
-    // Reservations filter logic
-    if (startDate && endDate) {
-        filter.reservations = {
-            $not: {
-                $elemMatch: {
-                    startDate: { $lt: new Date(endDate) },
-                    endDate: { $gt: new Date(startDate) } 
-                }
-            }
-        };
+        filter.city = city;
     }
 
     try {
+        let reservedApartments = [];
+
+        // Verifica si se han proporcionado fechas de inicio y fin
+        if (startDate && endDate) {
+            const reservations = await Reservation.find({
+                $or: [
+                    { startDate: { $lt: new Date(endDate) }, endDate: { $gt: new Date(startDate) } }
+                ]
+            });
+
+            reservedApartments = reservations.map(reservation => reservation.apartment.toString());
+        }
+
+        // Excluye los apartamentos reservados del filtro
+        if (reservedApartments.length > 0) {
+            filter._id = { $nin: reservedApartments };
+        }
+
         // Fetch filtered apartments and sort
         const apartments = await Apartment.find(filter).sort(sortCriteria);
 
         // Pass filtered apartments to the view
         res.render('home', {
-            apartments
+            apartments,
+            isAuthenticated: req.session.isAuthenticated || false,
+            role: req.session.role || null,
+            username: req.session.username || 'Guest'
         });
 
     } catch (error) {
         console.error("Error fetching apartments:", error);
         res.status(500).send('Internal Server Error');
     }
-};   
+};
+
 
 const postNewReservation = async (req, res) => {
     const { email, startDate, endDate, idApartment } = req.body;
