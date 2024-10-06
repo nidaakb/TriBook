@@ -15,7 +15,6 @@ const getApartments = async (req, res) => {
         isAuthenticated: req.session.isAuthenticated || false,
         role: req.session.role || null,
         username: req.session.username || 'Guest'
-
     });
 }
 
