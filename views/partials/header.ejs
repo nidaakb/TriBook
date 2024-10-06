@@ -5,10 +5,12 @@
             <% if (isAdmin) { %>
                 <p><a href="/admin/apartment/new-apartment">Add new apartment</a></p>
                 <p><a href="/logout">Logout</a></p>
-                <% } else { %>
-                    <p><a href="/login">Login</a></p>
-                    <p><a href="/signup">Sign Up</a></p>
-                    <% } %>
+                <% } else if (isAuthenticated) { %>
+                    <p><a href="/logout">Logout</a></p>
+                    <% } else { %>
+                        <p><a href="/login">Login</a></p>
+                        <p><a href="/signup">Sign Up</a></p>
+                        <% } %>
         </nav>
     </div>
     <div>
