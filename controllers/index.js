@@ -61,13 +61,13 @@ const searchApartments = async (req, res) => {
 
     // Add conditions based on the provided query parameters
     if (maxPrice) {
-        filter.price = { $lte: Number(maxPrice) }; // Ensure maxPrice is a number
+        filter.price = { $lte: Number(maxPrice) }; 
     }
     if (capacity) {
-        filter.capacity = { $gte: Number(capacity) }; // Change from $lte to $gte for proper capacity filtering
+        filter.capacity = { $gte: Number(capacity) };
     }
     if (city) {
-        filter.city = city; // Only apply city filter if it's provided
+        filter.city = city; 
     }
 
     // Reservations filter logic
@@ -90,6 +90,7 @@ const searchApartments = async (req, res) => {
         res.render('home', {
             apartments
         });
+
     } catch (error) {
         console.error("Error fetching apartments:", error);
         res.status(500).send('Internal Server Error');
